@@ -24,7 +24,7 @@ class ZiseaspiderSpider(scrapy.Spider):
 
     def parse(self, response):
         text = response.css('td[style="FONT-SIZE: 10em;"] + td').get()
-        regex = r'两分字元：(?P<lfzy>[^\n]+)\n.+?字形描述：(?P<zxms>[^<]+)<br>.+?提交来源：(?P<tjly>[^<]+)'
+        regex = r'两分字元：(?P<lfzy>[^\r]+)\r\n.+?字形描述：(?P<zxms>[^<]*)<br>.+?提交来源：(?P<tjly>[^<]+)'
         match = re.search(regex, text, re.DOTALL)
         yield \
             { 'cp': '%X' % response.meta['code_point']
